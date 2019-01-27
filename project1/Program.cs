@@ -6,80 +6,194 @@ namespace project1
     {
         static void Main(string[] args)
         {
-            int[,] num = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }, { 10, 11, 12 }, { 13, 14, 15 }, { 16, 17, 18 }, { 19, 20, 21 } };
-            int highlight = 1;
-
-            ConsoleKey userKey = new ConsoleKey();
-            while (userKey != ConsoleKey.Enter)
+            Player[,] players = { { new Player(0,"Joe",1,"f","q",1), new Player(1, "Bob", 1, "f", "q", 1) , new Player(2, "Henry", 1, "f", "q", 1) , new Player(3, "Fahd", 1, "f", "q", 1) , new Player(4, "Carl", 1, "f", "q", 1)} ,
+                                   { new Player(5,"Al",1,"f","q",1), new Player(6, "Ben", 1, "f", "q", 1) , new Player(7, "Rob", 1, "f", "q", 1) , new Player(8, "Ken", 1, "f", "q", 1) , new Player(9, "Nate", 1, "f", "q", 1)} };
+            Display display = new Display(players);
+            display.run();
+        }
+        class Display
+        {
+            Player[,] players;
+            public Display(Player[,] _players)
             {
-                for (int i = 0; i < 7; i++)
-                {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        if (highlight == num[i, j])
-                        {
-                            Console.BackgroundColor = ConsoleColor.Green;
-                        }
-                        else
-                        {
-                            Console.BackgroundColor = ConsoleColor.Black;
-                        }
-                        Console.Write(num[i, j] + "\t");
-
-                    }
-                    Console.WriteLine();
-                }
-                userKey = Console.ReadKey().Key;
-
-                if (userKey == ConsoleKey.DownArrow)
-                {
-                    highlight += 3;
-                }
-                else if (userKey == ConsoleKey.UpArrow)
-                {
-                    highlight -= 3;
-                }
-                else if (userKey == ConsoleKey.RightArrow)
-                {
-                    highlight++;
-                }
-                else if (userKey == ConsoleKey.LeftArrow)
-                {
-                    highlight--;
-                }
-
-                if (highlight < 1)
-                {
-                    highlight = 1;
-                }
-                else if (highlight > 21)
-                {
-                    highlight = 21;
-                }
-
-                Console.Clear();
+                players = _players;
             }
+            public void run()
+            {
+                int highlight = 0;
+
+                ConsoleKey userKey = new ConsoleKey();
+                while (userKey != ConsoleKey.Escape)
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        for (int j = 0; j < 5; j++)
+                        {
+                            if (highlight == players[i, j].getArrayPosition())
+                            {
+                                Console.BackgroundColor = ConsoleColor.Green;
+                            }
+                            else if(players[i,j].getSelected())
+                            {
+                                Console.BackgroundColor = ConsoleColor.Red;
+                            }
+                            else
+                            {
+                                Console.BackgroundColor = ConsoleColor.Black;
+                            }
+                            Console.Write(players[i, j].getName() + "\t");
+
+                        }
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.WriteLine();
+                    }
+                    userKey = Console.ReadKey().Key;
+
+                    if (userKey == ConsoleKey.DownArrow)
+                    {
+                        int original = highlight;
+                        highlight += 5;
+                        try
+                        {
+                            while (getPlayer(highlight).getSelected())
+                            {
+                                highlight += 5;
+                            }
+                        }
+                        catch
+                        {
+                            highlight = original;
+                        }
+                    }
+                    else if (userKey == ConsoleKey.UpArrow)
+                    {
+                        int original = highlight;
+                        highlight -= 5;
+                        try
+                        {
+                            while (getPlayer(highlight).getSelected())
+                            {
+                                highlight -=5;
+                            }
+                        }
+                        catch
+                        {
+                            highlight = original;
+                        }
+                    }
+                    else if (userKey == ConsoleKey.RightArrow)
+                    {
+                        int original = highlight;
+                        highlight++;
+                        try
+                        {
+                            while (getPlayer(highlight).getSelected())
+                            {
+                                highlight++;
+                            }
+                        }
+                        catch
+                        {
+                            highlight = original;
+                        }
+                    }
+                    else if (userKey == ConsoleKey.LeftArrow)
+                    {
+                        int original = highlight;
+                        highlight--;
+                        try
+                        {
+                            while (getPlayer(highlight).getSelected())
+                            {
+                                highlight--;
+                            }
+                        }
+                        catch
+                        {
+                            highlight = original;
+                        }
+                    }
+                    else if(userKey == ConsoleKey.Enter)
+                    {
+                        getPlayer(highlight).selectPlayer();
+                    }
+
+                    if (highlight < 0)
+                    {
+                        highlight = 0;
+                    }
+                    else if (highlight > 9)
+                    {
+                        highlight = 9;
+                    }
+
+                    Console.Clear();
+                }
+            }
+            public Player getPlayer(int playerNum)
+            {
+                foreach (Player player in players)
+                {
+                    if (player.getArrayPosition() == playerNum)
+                    {
+                        return player;
+                    }
+                }
+                return null;
+            }
+            
         }
         class Player
         {
+            int arrayPosition;
             string name;
-            int cost;
+            int salary;
             string school;
             string position;
-            int place;
+            int rank;
+            bool selected;
 
-            public Player(string _name, int _cost, string _school, string _position, int _place)
+            public Player(int _arrayPosition, string _name, int _salary, string _school, string _position, int _rank)
             {
+                arrayPosition = _arrayPosition;
                 name = _name;
-                cost = _cost;
+                salary = _salary;
                 school = _school;
                 position = _position;
-                place = _place;
+                rank = _rank;
+                selected = false;
             }
-
-            public void printInfo()
+            public int getArrayPosition()
             {
-                Console.WriteLine();
+                return arrayPosition;
+            }
+            public string getName()
+            {
+                return name;
+            }
+            public string getPosition()
+            {
+                return position;
+            }
+            public int getSalary()
+            {
+                return salary;
+            }
+            public string getSchool()
+            {
+                return school;
+            }
+            public int getRank()
+            {
+                return rank;
+            }
+            public bool getSelected()
+            {
+                return selected;
+            }
+            public void selectPlayer()
+            {
+                selected = true;
             }
         }
     }
