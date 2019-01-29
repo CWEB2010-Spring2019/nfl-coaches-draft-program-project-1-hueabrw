@@ -1,0 +1,322 @@
+[
+	{
+		"name" : "Dwayne Haskins",
+		"salary" : "26400100",
+		"school" : "Ohio St.",
+		"position" : "Quarterback",
+		"rank" : "1",
+		"selected" : "false"
+	},
+	{
+		"name" : "Kyle Murray",
+		"salary" : "20300100",
+		"school" : "Oklahoma",
+		"position" : "Quarterback",
+		"rank" : "2",
+		"selected" : "false"
+	},
+	{
+		"name" : "Drew Lock",
+		"salary" : "17420300",
+		"school" : "Missouri",
+		"position" : "Quarterback",
+		"rank" : "3",
+		"selected" : "false"
+	},
+	{
+		"name" : "Daniel Jones",
+		"salary" : "13100145",
+		"school" : "Duke",
+		"position" : "Quarterback",
+		"rank" : "4",
+		"selected" : "false"
+	},
+	{
+		"name" : "Will Grier",
+		"salary" : "10300000",
+		"school" : "West Virginia",
+		"position" : "Quarterback",
+		"rank" : "5",
+		"selected" : "false"
+	},
+	{
+		"name" : "Josh Jacobs",
+		"salary" : "24500100",
+		"school" : "Alabama",
+		"position" : "Running Back",
+		"rank" : "1",
+		"selected" : "false"
+	},
+	{
+		"name" : "Damien Harris",
+		"salary" : "19890200",
+		"school" : "Alabama",
+		"position" : "Running Back",
+		"rank" : "2",
+		"selected" : "false"
+	},
+	{
+		"name" : "David Montgomery",
+		"salary" : "18700800",
+		"school" : "Iowa St.",
+		"position" : "Running Back",
+		"rank" : "3",
+		"selected" : "false"
+	},
+	{
+		"name" : "Justice Hill",
+		"salary" : "15000000",
+		"school" : "Oklahoma St.",
+		"position" : "Running Back",
+		"rank" : "4",
+		"selected" : "false"
+	},
+	{
+		"name" : "Devin Singletary",
+		"salary" : "11600400",
+		"school" : "FAU",
+		"position" : "Running Back",
+		"rank" : "5",
+		"selected" : "false"
+	},
+	{
+		"name" : "D.K. Metcalf",
+		"salary" : "23400000",
+		"school" : "Ole Miss",
+		"position" : "Wide-Receiver",
+		"rank" : "1",
+		"selected" : "false"
+	},
+	{
+		"name" : "A.J. Brown",
+		"salary" : "21900300",
+		"school" : "Ole Miss",
+		"position" : "Wide-Receiver",
+		"rank" : "2",
+		"selected" : "false"
+	},
+	{
+		"name" : "N'Keal Harry",
+		"salary" : "19300230",
+		"school" : "Arizona St.",
+		"position" : "Wide-Receiver",
+		"rank" : "3",
+		"selected" : "false"
+	},
+	{
+		"name" : "Marquise Brown",
+		"salary" : "13400230",
+		"school" : "Oklahoma",
+		"position" : "Wide-Receiver",
+		"rank" : "4",
+		"selected" : "false"
+	},
+	{
+		"name" : "Kelvin Harmon",
+		"salary" : "10000000",
+		"school" : "NC State",
+		"position" : "Wide-Receiver",
+		"rank" : "5",
+		"selected" : "false"
+	},
+	{
+		"name" : "Nick Bosa",
+		"salary" : "26200300",
+		"school" : "Ohio St.",
+		"position" : "Defensive Lineman",
+		"rank" : "1",
+		"selected" : "false"
+	},
+	{
+		"name" : "Quinnen Williams",
+		"salary" : "22000000",
+		"school" : "Alabama",
+		"position" : "Defensive Lineman",
+		"rank" : "2",
+		"selected" : "false"
+	},
+	{
+		"name" : "Ed Oliver",
+		"salary" : "16000000",
+		"school" : "Houston",
+		"position" : "Defensive Lineman",
+		"rank" : "3",
+		"selected" : "false"
+	},
+	{
+		"name" : "Jeffery Simmons",
+		"salary" : "18000000",
+		"school" : "Miss. State",
+		"position" : "Defensive Lineman",
+		"rank" : "4",
+		"selected" : "false"
+	},
+	{
+		"name" : "Clelin Ferrell",
+		"salary" : "13000000",
+		"school" : "Clemson",
+		"position" : "Defensive Lineman",
+		"rank" : "5",
+		"selected" : "false"
+	},
+	{
+		"name" : "Greedy Williams",
+		"salary" : "24000000",
+		"school" : "LSU",
+		"position" : "Defensive-Back",
+		"rank" : "1",
+		"selected" : "false"
+	},
+	{
+		"name" : "Deandre Baker",
+		"salary" : "22500249",
+		"school" : "Georgia",
+		"position" : "Defensive-Back",
+		"rank" : "2",
+		"selected" : "false"
+	},
+	{
+		"name" : "Byron Murphy",
+		"salary" : "20000100",
+		"school" : "Washington",
+		"position" : "Defensive-Back",
+		"rank" : "3",
+		"selected" : "false"
+	},
+	{
+		"name" : "Deionte Thompson",
+		"salary" : "16000200",
+		"school" : "Alabama",
+		"position" : "Defensive-Back",
+		"rank" : "4",
+		"selected" : "false"
+	},
+	{
+		"name" : "Amani Oruwariye",
+		"salary" : "11899999",
+		"school" : "Penn State",
+		"position" : "Defensive-Back",
+		"rank" : "5",
+		"selected" : "false"
+	},
+	{
+		"name" : "Noah Fant",
+		"salary" : "27800900",
+		"school" : "Iowa",
+		"position" : "Tight End",
+		"rank" : "1",
+		"selected" : "false"
+	},
+	{
+		"name" : "Irv Smith",
+		"salary" : "21000800",
+		"school" : "Alabama",
+		"position" : "Tight End",
+		"rank" : "2",
+		"selected" : "false"
+	},
+	{
+		"name" : "T.J. Hockenson",
+		"salary" : "17499233",
+		"school" : "Iowa",
+		"position" : "Tight End",
+		"rank" : "3",
+		"selected" : "false"
+	},
+	{
+		"name" : "Kaden Smith",
+		"salary" : "27900200",
+		"school" : "Stanford",
+		"position" : "Tight End",
+		"rank" : "4",
+		"selected" : "false"
+	},
+	{
+		"name" : "Josh Oliver",
+		"salary" : "14900333",
+		"school" : "San Jose St.",
+		"position" : "Tight End",
+		"rank" : "5",
+		"selected" : "false"
+	},
+	{
+		"name" : "Josh Allen",
+		"salary" : "27800900",
+		"school" : "Kentucky",
+		"position" : "Line-Backer",
+		"rank" : "1",
+		"selected" : "false"
+	},
+	{
+		"name" : "Devin White",
+		"salary" : "19000590",
+		"school" : "LSU",
+		"position" : "Line-Backer",
+		"rank" : "2",
+		"selected" : "false"
+	},
+	{
+		"name" : "Montez Sweat",
+		"salary" : "18000222",
+		"school" : "Miss. State",
+		"position" : "Line-Backer",
+		"rank" : "3",
+		"selected" : "false"
+	},
+	{
+		"name" : "Mack Wilson",
+		"salary" : "12999999",
+		"school" : "Alabama",
+		"position" : "Line-Backer",
+		"rank" : "4",
+		"selected" : "false"
+	},
+	{
+		"name" : "Devin Bush",
+		"salary" : "10000100",
+		"school" : "Michigan",
+		"position" : "Line-Backer",
+		"rank" : "5",
+		"selected" : "false"
+	},
+	{
+		"name" : "Jonah Williams",
+		"salary" : "23000000",
+		"school" : "Alabama",
+		"position" : "Offensive Tackle",
+		"rank" : "1",
+		"selected" : "false"
+	},
+	{
+		"name" : "Greg Little",
+		"salary" : "20000000",
+		"school" : "Ole Miss",
+		"position" : "Offensive Tackle",
+		"rank" : "2",
+		"selected" : "false"
+	},
+	{
+		"name" : "Cody Ford",
+		"salary" : "19400000",
+		"school" : "Oklahoma",
+		"position" : "Offensive Tackle",
+		"rank" : "3",
+		"selected" : "false"
+	},
+	{
+		"name" : "Jawaan Taylor",
+		"salary" : "16200700",
+		"school" : "Florida",
+		"position" : "Offensive Tackle",
+		"rank" : "4",
+		"selected" : "false"
+	},
+	{
+		"name" : "Yodny Cajuste",
+		"salary" : "15900000",
+		"school" : "West Virginia",
+		"position" : "Offensive Tackle",
+		"rank" : "5",
+		"selected" : "false"
+	}
+]
