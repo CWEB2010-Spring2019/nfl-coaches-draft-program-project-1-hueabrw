@@ -10,11 +10,7 @@ namespace project1
         static void Main(string[] args)
         {
             List<Player> players = JsonConvert.DeserializeObject<List<Player>>(File.ReadAllText(@"C:\code\Advanced Programming\Assignments\Project1\nfl-coaches-draft-program-project-1-hueabrw\project1\players.json"));
-
-            
-            /*Player[,] players = { { new Player(0,"Joe",1,"f","q",1), new Player(1, "Bob", 1, "f", "q", 1) , new Player(2, "Henry", 1, "f", "q", 1) , new Player(3, "Fahd", 1, "f", "q", 1) , new Player(4, "Carl", 1, "f", "q", 1)} ,
-                                   { new Player(5,"Al",1,"f","q",1), new Player(6, "Ben", 1, "f", "q", 1) , new Player(7, "Rob", 1, "f", "q", 1) , new Player(8, "Ken", 1, "f", "q", 1) , new Player(9, "Nate", 1, "f", "q", 1)} };
-            */        
+    
             Display display = new Display(players);
             display.run();
         }
@@ -23,6 +19,7 @@ namespace project1
         class Display
         {
             List<Player> players;
+            static List<string> positions = new List<string>(new string[] { "Quarterback", "Running Back", "Wide-Receiver", "Defensive Lineman", "Defensive-Back", "Tight End", "Line-Back", "Offensive Teackle" });
             int highlight;
             ConsoleKey userKey;
             public Display(List<Player> _players)
@@ -137,27 +134,43 @@ namespace project1
             private void DisplayChart()
             {
                 
-                foreach (Player player in players)
+                foreach (string position in positions)
                 {
-                    if (highlight == players.IndexOf(player))
+                    for (int i = positions.IndexOf(position) * 5; i < 5 + (5 * positions.IndexOf(position)); i++)
                     {
-                        Console.BackgroundColor = ConsoleColor.Green;
+                        print(players[i], players[i].name);
                     }
-                    else if (player.isSelected())
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.WriteLine();
+                    for (int i = positions.IndexOf(position) * 5; i < 5 + (5 * positions.IndexOf(position)); i++)
                     {
-                        Console.BackgroundColor = ConsoleColor.Red;
+                        print(players[i], players[i].school);
                     }
-                    else
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.WriteLine();
+                    for (int i = positions.IndexOf(position) * 5; i < 5 + (5 * positions.IndexOf(position)); i++)
                     {
-                        Console.BackgroundColor = ConsoleColor.Black;
+                        print(players[i], (players[i].salary).ToString("c"));
                     }
-                    Console.Write(player.name + "\t\t");
-                    if ((players.IndexOf(player)+1) % 5 == 0)
-                    {
-                        Console.BackgroundColor = ConsoleColor.Black;
-                        Console.WriteLine();
-                    }
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.WriteLine();
                 }
+            }
+            private void print(Player player, string data)
+            {
+                if (highlight == players.IndexOf(player))
+                {
+                    Console.BackgroundColor = ConsoleColor.Green;
+                }
+                else if (player.isSelected())
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
+                Console.Write(data.PadRight(20));
             }
 
             public Player getPlayer(int playerNum)
@@ -187,7 +200,6 @@ namespace project1
         }
         class Player
         {
-            public int arrayPosition { get; set; }
             public string name { get; set; }
             public int salary { get; set; }
             public string school { get; set; }
@@ -195,19 +207,14 @@ namespace project1
             public int rank { get; set; }
             public bool selected{ get; set; }
 
-            public Player(int _arrayPosition,  string _name, int _salary, string _school, string _position, int _rank)
+            public Player(string _name, int _salary, string _school, string _position, int _rank)
             {
-                arrayPosition = _arrayPosition;
                 name = _name;
                 salary = _salary;
                 school = _school;
                 position = _position;
                 rank = _rank;
                 selected = false;
-            }
-            public int getArrayPosition()
-            {
-                return arrayPosition;
             }
             public string getName()
             {
