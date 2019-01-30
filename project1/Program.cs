@@ -9,6 +9,7 @@ namespace project1
     {
         static void Main(string[] args)
         {
+            Console.SetWindowSize(150,45);
             List<Player> players = JsonConvert.DeserializeObject<List<Player>>(File.ReadAllText(@"C:\code\Advanced Programming\Assignments\Project1\nfl-coaches-draft-program-project-1-hueabrw\project1\players.json"));
     
             Display display = new Display(players);
@@ -19,11 +20,13 @@ namespace project1
         class Display
         {
             List<Player> players;
+            Manager user;
             static List<string> positions = new List<string>(new string[] { "Quarterback", "Running Back", "Wide-Receiver", "Defensive Lineman", "Defensive-Back", "Tight End", "Line-Back", "Offensive Teackle" });
             int highlight;
             ConsoleKey userKey;
             public Display(List<Player> _players)
             {
+                user = new Manager();
                 players = _players;
             }
             public void run()
@@ -31,7 +34,7 @@ namespace project1
                 highlight = 0;
 
                 userKey = new ConsoleKey();
-                while (userKey != ConsoleKey.Escape)
+                while (userKey != ConsoleKey.Escape && user.picks < 5)
                 {
                     
                     DisplayChart();
@@ -39,13 +42,61 @@ namespace project1
 
                     Console.Clear();
                 }
+                DisplayResults();
+
+                Console.WriteLine("Press any key to exit...");
+                Console.ReadKey();
             }
 
-            
-            private void Draft(Player chosenPlayer)
+            private void DisplayResults()
             {
-                throw new NotImplementedException();
+                int type = 0;
+                int highRank = 0;
+                Console.Write("Your pick:".PadRight(20));
+                for(int i = 0; i < 3; i++)
+                {
+                    if(type != 0)
+                    {
+                        Console.Write("".PadRight(20));
+                    }
+                    foreach(Player player in user.draftedPlayers)
+                    {
+                        printPlayerInfo(player, type);
+                    }
+                    Console.WriteLine();
+                    type++;
+                }
+                foreach(Player player in user.draftedPlayers)
+                {
+                    if(player.rank <= 3)
+                    {
+                        highRank++;
+                    }
+                }
+                int moneySpent = (95000000 - user.budget);
+                Console.WriteLine("The total you spent this draft: "+ moneySpent.ToString("c"));
+                if(moneySpent < 65000000 && highRank >= 3)
+                {
+                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.WriteLine("This was a cost effective draft!");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
             }
+
+            private void printPlayerInfo(Player player, int data)
+            {
+                if(data == 0)
+                {
+                    Console.Write(player.name.PadRight(20));
+                }else if (data == 2)
+                {
+                    Console.Write(player.salary.ToString("c").PadRight(20));
+                }else if (data == 1)
+                {
+                    Console.Write(player.school.PadRight(20));
+                }
+            }
+            
 
             private void NavigateChart()
             {
@@ -118,7 +169,10 @@ namespace project1
                 else if (userKey == ConsoleKey.Enter)
                 {
                     Player selectedPlayer = getPlayer(highlight);
-                    selectedPlayer.selected = true;
+                    if (user.draftPlayer(selectedPlayer))
+                    {
+                        selectedPlayer.selected = true;
+                    }
                 }
 
                 if (highlight < 0)
@@ -133,43 +187,56 @@ namespace project1
             }
             private void DisplayChart()
             {
-                
+                Console.WriteLine("Position".PadRight(20)+ "The Best".PadRight(20)+ "2nd Best".PadRight(20)+ "3rd Best".PadRight(20)+ "4th Best".PadRight(20)+ "5th Best".PadRight(20)+"\n");
                 foreach (string position in positions)
                 {
+                    Console.Write(position.PadRight(20));
                     for (int i = positions.IndexOf(position) * 5; i < 5 + (5 * positions.IndexOf(position)); i++)
                     {
                         print(players[i], players[i].name);
                     }
                     Console.BackgroundColor = ConsoleColor.Black;
                     Console.WriteLine();
+                    Console.Write("".PadRight(20));
                     for (int i = positions.IndexOf(position) * 5; i < 5 + (5 * positions.IndexOf(position)); i++)
                     {
                         print(players[i], players[i].school);
                     }
                     Console.BackgroundColor = ConsoleColor.Black;
                     Console.WriteLine();
+                    Console.Write("".PadRight(20));
                     for (int i = positions.IndexOf(position) * 5; i < 5 + (5 * positions.IndexOf(position)); i++)
                     {
                         print(players[i], (players[i].salary).ToString("c"));
                     }
                     Console.BackgroundColor = ConsoleColor.Black;
                     Console.WriteLine();
+                    Console.WriteLine();
+                }
+
+                Console.WriteLine("\nHighlight desired pick, Then press ENTER to draft player");
+                Console.WriteLine("\nPress ESCAPE to finish your draft");
+                Console.WriteLine("\nYour current budget: " + user.budget.ToString("c"));
+                if (user.draftedPlayers.Count > 0)
+                {
+                    Console.WriteLine("Your current draft: " + user.getDraftedPlayers());
                 }
             }
             private void print(Player player, string data)
             {
-                if (highlight == players.IndexOf(player))
+                
+                if (player.isSelected())
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                }else if (highlight == players.IndexOf(player))
                 {
                     Console.BackgroundColor = ConsoleColor.Green;
-                }
-                else if (player.isSelected())
-                {
-                    Console.BackgroundColor = ConsoleColor.Red;
                 }
                 else
                 {
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
+                
                 Console.Write(data.PadRight(20));
             }
 
@@ -188,14 +255,46 @@ namespace project1
         }
         class Manager
         {
-            double budget;
-            List<Player> draftedPlayers = new List<Player>();
-            int picks;
+            public int budget { get; set; }
+            public List<Player> draftedPlayers { get; set; }
+            public int picks { get; set; }
 
-            public Manager(double _budget, int _picks)
+            public Manager()
             {
-                budget = _budget;
-                picks = _picks;
+                budget = 95000000;
+                draftedPlayers = new List<Player>();
+                picks = 0;
+            }
+
+            public bool draftPlayer(Player player)
+            {
+                if(player.salary < budget)
+                {
+                    picks++;
+                    budget -= player.salary;
+                    draftedPlayers.Add(player);
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("This draft pick exceeds your budget");
+                    System.Threading.Thread.Sleep(1000);
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    return false;
+                }
+            }
+
+            internal string getDraftedPlayers()
+            {
+                string players = "";
+                foreach(Player player in draftedPlayers)
+                {
+                    players += (player.name + ", ");
+                }
+                return players;
+
             }
         }
         class Player
@@ -216,26 +315,7 @@ namespace project1
                 rank = _rank;
                 selected = false;
             }
-            public string getName()
-            {
-                return name;
-            }
-            public string getPosition()
-            {
-                return position;
-            }
-            public int getSalary()
-            {
-                return salary;
-            }
-            public string getSchool()
-            {
-                return school;
-            }
-            public int getRank()
-            {
-                return rank;
-            }
+            
             public bool isSelected()
             {
                 return selected;
